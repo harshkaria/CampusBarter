@@ -103,8 +103,8 @@ router.route('/comments')
         var user = new User();
         //body parser lets us use the req.body
         user.name = req.body.name;
-        item.messages = req.body.messages;
-        item.save(function(err) {
+        user.messages = req.body.messages;
+        user.save(function(err) {
           if (err)
             res.send(err);
           res.json({ message: 'User successfully added!' });
