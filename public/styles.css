@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#id {
+  display: flex;
+  justify-content: center; }
+
+.litContainer {
+  font-size: 25px;
+  border: 3px solid red; }
+
+.text {
+  font-size: 35px;
+  border: 1px solid; }
+
+.header {
+  font-size: 40px; }
