@@ -1,7 +1,74 @@
 import React from 'react'
+import Message from './Message'
+import axios from 'axios'
 
 class Inbox extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      usersData:[],
+      usersUrl:"http://localhost:3001/api/users",
+      nounted: false
+    }
+    this.load = this.load.bind(this)
+    this.loadUsersData = this.loadUsersData.bind(this)
+  }
+
+  load(){
+    if(!this.state.mounted){
+      this.setState({
+        mounted:true
+      })
+      this.loadUsersData()
+      setInterval(this.loadUsersData, 800)
+    }
+  }
+
+  loadUsersData(){
+    axios.get(this.state.usersUrl)
+      .then(res => {
+        this.setState({ usersData: res.data })
+      })
+    console.log(this.state.usersData)
+  }
+
   render(){
+    this.load()
+    var rra = this.state.usersData
+    var arr = rra[0]
+    var arr2 = []
+    var count = 0
+    var i = 0
+    var list = null
+    if(arr!=null){
+      console.log(arr.messages)
+      arr = arr.messages
+      count = Math.ceil(arr.length/3)
+      for(i = 0; i < count; i++)
+        arr2.push([])
+      var index = 0
+      for(i=0; i<arr.length; i++){
+        if(arr[i]!=null && arr2[index]!=null)
+          arr2[index].push(arr[i])
+        if((i+1)%3==0)
+          index++
+      }
+      list = arr2.map((x,index) => {
+        return(
+          <div className="row">
+          {x.map((x,index) => {
+            return(
+              <Message
+                sender = {x.sender}
+                message = {x.message}
+                />
+            )
+          })}
+          </div>
+        )
+      })
+    }
+
     return(
       <div>
         <center>
@@ -12,44 +79,7 @@ class Inbox extends React.Component {
         </center>
 
         <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-4">
-              <div className="card card-body">
-                <h4 className="card-title">Item Name:
-                  <i><small>Buyer Name</small></i>
-                </h4>
-                <p className="card-text">Message</p>
-                <a href="#" className="btn btn-success" data-toggle="modal" data-target="#acceptModal">Accept</a>
-                <div className="space"></div>
-                <a href="#" className="btn btn-danger" data-toggle="modal" data-target="#declineModal">Decline</a>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="card card-body">
-                <h4 className="card-title">Item Name:
-                  <i><small>Buyer Name</small></i>
-                </h4>
-                <p className="card-text">Message</p>
-                <a href="#" className="btn btn-success" data-toggle="modal" data-target="#acceptModal">Accept</a>
-                <div className="space"></div>
-                <a href="#" className="btn btn-danger" data-toggle="modal" data-target="#declineModal">Decline</a>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="card card-body">
-                <h4 className="card-title">Item:
-                  <i><small>Buyer Name</small></i>
-                </h4>
-                <p className="card-text">Message</p>
-                <a href="#" className="btn btn-success" data-toggle="modal" data-target="#acceptModal">Accept</a>
-                <div className="space"></div>
-                <a href="#" className="btn btn-danger" data-toggle="modal" data-target="#declineModal">Decline</a>
-              </div>
-            </div>
-
-          </div>
+          {list}
         </div>
 
         <div className="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
