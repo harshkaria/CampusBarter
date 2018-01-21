@@ -14,11 +14,20 @@ class Main extends React.Component {
   render(){
     return(
       <Switch>
-        <Route exact path ="/" component={Barterfeed}/>
-        <Route path = "/barterlist" component={Barterlist}/>
+        <Route exact path ="/" component={Barterlist}/>
+        <Route path = "/barterlist" render={()=>{
+            return(<Barterlist currentUser={this.props.currentUser}/>)
+          }
+        }/>
         <Route path = "/barterfeed" component={Barterfeed}/>
-        <Route path = "/services" component={Services}/>
-        <Route path = "/inbox" component={Inbox}/>
+        <Route path = "/services" render={()=>{
+            return(<Services currentUser={this.props.currentUser}/>)
+          }
+        }/>
+        <Route path = "/inbox" render={()=>{
+            return(<Inbox currentUser={this.props.currentUser}/>)
+          }
+        }/>
       </Switch>
     )
   }

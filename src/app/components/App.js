@@ -199,11 +199,6 @@ class App extends React.Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
-              <Link to="/barterfeed">
-              <li id="list1" className={this.state.classnames[0]} data-id="1" onClick={this.handleClick}>
-                <a className="nav-link" href="#" >Barter Feed</a>
-              </li>
-              </Link>
               <Link to="/barterlist">
               <li className={this.state.classnames[1]} data-id="2" onClick={this.handleClick}>
                 <a className="nav-link" href="#">Barter List</a>
@@ -224,7 +219,7 @@ class App extends React.Component {
           </div>
         </div>
         </nav>
-        <Main />
+        <Main currentUser={this.props.currentUser}/>
         </div>
 
           /*<div>

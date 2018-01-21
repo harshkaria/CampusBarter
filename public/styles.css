@@ -31,3 +31,8 @@ body {
   border-radius:10px 10px 10px 10px;
   margin: 1px;
 }
+
+.sized {
+  width: 200px;
+  height: 200px;
+}
