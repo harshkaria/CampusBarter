@@ -199,7 +199,7 @@ class Services extends React.Component {
           </div>
         </div>
 
-        <div className="container">
+        <div className="container-fluid content-row">
           <div className="col-lg-12">
             {list}
           </div>

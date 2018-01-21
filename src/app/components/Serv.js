@@ -30,10 +30,20 @@ class Serv extends React.Component {
 
   render(){
     var soldVal = this.props.sold
+    var str = this.props.desc
+    var n = (130 - str.length)/18
+    var arr = []
+    var i = 0
+    for(i = 0; i < n; i++)
+      arr.push(i)
+    var list = arr.map((x, index)=>{
+      return(<br />)
+    })
+    console.log(str.length)
     console.log(this.props.sold)
     return(
       //col-lg-4 col-md-6 mb-4
-      <div className="col-lg-4 d-flex align-items-stretch">
+      <div className="col-lg-4 col-md-6 mb-4">
         <div className="box">
           <div className="card-header">
             <div>
@@ -43,10 +53,10 @@ class Serv extends React.Component {
             </div>
             <div className="card-body">
               <i><h6>{this.props.owner}</h6></i>
-              <p className="card-text">{this.props.desc}</p>
+              <p className="card-text">{str}</p>
               {soldVal && <center><button type="button" className="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#myModal" onClick={this.reg}>Purchase</button></center>}
             </div>
-          </div>
+        </div>
         </div>
       </div>
     )
